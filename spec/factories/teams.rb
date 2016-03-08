@@ -1,6 +1,11 @@
 FactoryGirl.define do
   factory :team do
-    subdomain "MyString"
-    name "MyString"
+    sequence :subdomain do |n|
+      "team_#{n}"
+    end
+
+    sequence :name do  |n|
+      "Team #{n}"
+    end
   end
 end
