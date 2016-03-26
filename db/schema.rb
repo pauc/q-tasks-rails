@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306123747) do
+ActiveRecord::Schema.define(version: 20160325233023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 20160306123747) do
 
   add_index "projects", ["name", "team_id"], name: "index_projects_on_name_and_team_id", unique: true, using: :btree
   add_index "projects", ["team_id"], name: "index_projects_on_team_id", using: :btree
+
+  create_table "task_dependencies", force: :cascade do |t|
+    t.integer  "dependent_task_id",  null: false
+    t.integer  "dependency_task_id", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "task_dependencies", ["dependency_task_id"], name: "index_task_dependencies_on_dependency_task_id", using: :btree
+  add_index "task_dependencies", ["dependent_task_id"], name: "index_task_dependencies_on_dependent_task_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name",        null: false
@@ -82,6 +92,8 @@ ActiveRecord::Schema.define(version: 20160306123747) do
   add_foreign_key "assignments", "users", on_delete: :cascade
   add_foreign_key "jobs", "projects", on_delete: :cascade
   add_foreign_key "projects", "teams", on_delete: :cascade
+  add_foreign_key "task_dependencies", "tasks", column: "dependency_task_id", on_delete: :cascade
+  add_foreign_key "task_dependencies", "tasks", column: "dependent_task_id", on_delete: :cascade
   add_foreign_key "tasks", "jobs", on_delete: :cascade
   add_foreign_key "users", "teams", on_delete: :cascade
 end
