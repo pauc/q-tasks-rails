@@ -6,11 +6,13 @@ gem 'rails', '4.2.5.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 
+# Authentication and Authorization
 gem 'devise'
 gem 'doorkeeper', '~> 3.1'
+gem 'doorkeeper-i18n'
 
 gem 'responders'
-gem 'active_model_serializers', '~> 0.10.0.rc4'
+gem 'active_model_serializers', '~> 0.10.0.rc5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
