@@ -6,4 +6,12 @@ Rails.application.routes.draw do
   end
 
   resources :teams
+
+  scope path: "/:team_id" do
+    with_options except: [:new, :edit] do
+      resources :projects
+    end
+  end
+
+  get "*path", to: "welcome#index"
 end
