@@ -1,6 +1,6 @@
-class CreateJobs < ActiveRecord::Migration
+class CreateGoals < ActiveRecord::Migration
   def change
-    create_table :jobs do |t|
+    create_table :goals do |t|
       t.string :name, null: false
       t.text :description
       t.references :project, null: false, index: true,
@@ -9,6 +9,6 @@ class CreateJobs < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :jobs, [:name, :project_id], unique: true
+    add_index :goals, [:name, :project_id], unique: true
   end
 end

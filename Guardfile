@@ -28,7 +28,7 @@ guard :rspec, cmd: "bin/rspec --format doc" do
   end
 
   watch(%r(^app/operations/(.+)_controller/.+\.rb$)) do |m|
-    "spec/#{m[1]}_controller_spec.rb"
+    "spec/controllers/#{m[1]}_controller_spec.rb"
   end
 
   # Rails config changes

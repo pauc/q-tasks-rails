@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :job do
-    sequence(:name) { |n| "Job #{n}"}
+  factory :goal do
+    sequence(:name) { |n| "Goal #{n}"}
     description "MyText"
     project
   end

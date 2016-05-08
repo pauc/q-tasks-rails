@@ -3,12 +3,12 @@ class CreateTasks < ActiveRecord::Migration
     create_table :tasks do |t|
       t.string :name, null: false
       t.text :description
-      t.references :job, index: true, foreign_key: { on_delete: :cascade },
+      t.references :goal, index: true, foreign_key: { on_delete: :cascade },
         null: false
 
       t.timestamps null: false
     end
 
-    add_index :tasks, [:name, :job_id], unique: :true
+    add_index :tasks, [:name, :goal_id], unique: :true
   end
 end

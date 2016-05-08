@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424150745) do
+ActiveRecord::Schema.define(version: 20160508165847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160424150745) do
   add_index "assignments", ["task_id"], name: "index_assignments_on_task_id", using: :btree
   add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
 
-  create_table "jobs", force: :cascade do |t|
+  create_table "goals", force: :cascade do |t|
     t.string   "name",        null: false
     t.text     "description"
     t.integer  "project_id",  null: false
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 20160424150745) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "jobs", ["name", "project_id"], name: "index_jobs_on_name_and_project_id", unique: true, using: :btree
-  add_index "jobs", ["project_id"], name: "index_jobs_on_project_id", using: :btree
+  add_index "goals", ["name", "project_id"], name: "index_goals_on_name_and_project_id", unique: true, using: :btree
+  add_index "goals", ["project_id"], name: "index_goals_on_project_id", using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
@@ -77,10 +77,11 @@ ActiveRecord::Schema.define(version: 20160424150745) do
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
   create_table "projects", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.integer  "team_id",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",        null: false
+    t.integer  "team_id",     null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "description"
   end
 
   add_index "projects", ["name", "team_id"], name: "index_projects_on_name_and_team_id", unique: true, using: :btree
@@ -99,13 +100,13 @@ ActiveRecord::Schema.define(version: 20160424150745) do
   create_table "tasks", force: :cascade do |t|
     t.string   "name",        null: false
     t.text     "description"
-    t.integer  "job_id",      null: false
+    t.integer  "goal_id",     null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "tasks", ["job_id"], name: "index_tasks_on_job_id", using: :btree
-  add_index "tasks", ["name", "job_id"], name: "index_tasks_on_name_and_job_id", unique: true, using: :btree
+  add_index "tasks", ["goal_id"], name: "index_tasks_on_goal_id", using: :btree
+  add_index "tasks", ["name", "goal_id"], name: "index_tasks_on_name_and_goal_id", unique: true, using: :btree
 
   create_table "teams", force: :cascade do |t|
     t.string   "subdomain",  null: false
@@ -129,11 +130,11 @@ ActiveRecord::Schema.define(version: 20160424150745) do
 
   add_foreign_key "assignments", "tasks", on_delete: :cascade
   add_foreign_key "assignments", "users", on_delete: :cascade
-  add_foreign_key "jobs", "projects", on_delete: :cascade
+  add_foreign_key "goals", "projects", on_delete: :cascade
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id", on_delete: :cascade
   add_foreign_key "projects", "teams", on_delete: :cascade
   add_foreign_key "task_dependencies", "tasks", column: "dependency_task_id", on_delete: :cascade
   add_foreign_key "task_dependencies", "tasks", column: "dependent_task_id", on_delete: :cascade
-  add_foreign_key "tasks", "jobs", on_delete: :cascade
+  add_foreign_key "tasks", "goals", on_delete: :cascade
   add_foreign_key "users", "teams", on_delete: :cascade
 end

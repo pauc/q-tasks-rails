@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe TaskDependency, type: :model do
   it "works" do
     t1 = create :task
-    t2 = create :task, job: t1.job
+    t2 = create :task, goal: t1.goal
 
     t2.dependencies << t1
 

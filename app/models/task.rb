@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  belongs_to :job
+  belongs_to :goal
   has_many :assignments
   has_many :users, through: :assignments
   has_many :task_dependencies, foreign_key: :dependent_task_id,
@@ -11,6 +11,5 @@ class Task < ActiveRecord::Base
   has_many :dependent_tasks, through: :inverse_task_dependency,
     source: :dependent_task
 
-  validates :name, presence: true, uniqueness: { scope: :job_id }
-  validates :job, presence: true
+  validates :name, presence: true, uniqueness: { scope: :goal_id }
 end

@@ -4,8 +4,8 @@ FactoryGirl.define do
     association :dependency_task, factory: :task
 
     after(:build) do |dependency|
-      dependency.dependency_task.job =
-        dependency.dependent_task.job
+      dependency.dependency_task.goal =
+        dependency.dependent_task.goal
     end
   end
 end

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  it "gets destroyed when its job is destroyed" do
+  it "gets destroyed when its goal is destroyed" do
     task = create :task
 
-    task.job.destroy
+    task.goal.destroy
 
     expect(Task.exists?(task.id)).to be false
   end
@@ -13,8 +13,8 @@ RSpec.describe Task, type: :model do
     it "returns the users assigned to the task" do
       task = create :task
 
-      user_1 = create :user, team: task.job.project.team
-      user_2 = create :user, team: task.job.project.team
+      user_1 = create :user, team: task.goal.project.team
+      user_2 = create :user, team: task.goal.project.team
 
       create :assignment, user: user_1, task: task
       create :assignment, user: user_2, task: task

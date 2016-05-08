@@ -12,7 +12,7 @@ RSpec.describe User, type: :model do
   describe "#tasks" do
     it "returns the tasks assigned to the user" do
       task_1 = create :task
-      task_2 = create :task, job: task_1.job
+      task_2 = create :task, goal: task_1.goal
 
       user = create :user
 
