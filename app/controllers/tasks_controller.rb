@@ -1,3 +1,3 @@
 class TasksController < ApplicationController
-  default_operations_for :index, :show, :create
+  default_operations_for :index, :show, :create, :update
 end

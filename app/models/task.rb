@@ -12,4 +12,6 @@ class Task < ActiveRecord::Base
     source: :dependent_task
 
   validates :name, presence: true, uniqueness: { scope: :goal_id }
+
+  acts_as_list scope: :goal
 end

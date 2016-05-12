@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5.2'
+gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 
@@ -17,6 +17,8 @@ gem 'active_model_serializers', '~> 0.10.0.rc5'
 gem 'redis', '~>3.3'
 
 gem 'dotenv-rails'
+
+gem 'acts_as_list'
 
 group :production do
   gem 'unicorn'
