@@ -6,16 +6,24 @@ quipu_attrs = {
 quipu = Team.find_or_create_by quipu_attrs
 
 users_attrs = [{
-  username: "Example",
-  email:    "example@example.com",
+  username: "Hayk",
+  email:    "h@h.com",
   team:     quipu
 }, {
-  username: "Rokia",
-  email: "ro@ki.a",
+  username: "Albert",
+  email: "a@a.com",
+  team: quipu
+}, {
+  username: "Júlia",
+  email: "j@j.com",
+  team: quipu
+}, {
+  username: "Oriol",
+  email: "o@o.com",
   team: quipu
 }, {
   username: "Zacarías",
-  email:    "za@ca.net",
+  email:    "z@z.com",
   team:     quipu
 }]
 
