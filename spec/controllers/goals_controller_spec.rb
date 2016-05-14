@@ -54,10 +54,9 @@ RSpec.describe GoalsController, type: :api do
   end
 
   describe "POST /:team_id/goals" do
-    it "works" do
-      project = create :project, team: team
+    let(:project) { create :project, team: team }
 
-      expect {
+    def perform_request
         with_auth_for user do
           post :create, team_id: team.subdomain, data: {
             type: "goals",
@@ -75,15 +74,31 @@ RSpec.describe GoalsController, type: :api do
             }
           }
         end
-      }.to change {
-        team.goals.count
-      }.by(1)
+    end
+
+    it "works" do
+      expect { perform_request }.to change { team.goals.count }.by(1)
 
       expect(json_attributes[:name]).to eq "A new goal"
       expect(json_attributes[:description])
         .to eq "Lorem ipsum blah blah blah..."
       expect(json_relationships[:project][:data][:id])
         .to eq project.id.to_s
+    end
+
+    it "creates also a first empty task for the goal and includes it in the response" do
+      expect { perform_request }.to change { team.tasks.reload.count }.by(1)
+
+      expect(json_included.size).to eq 1
+      expect(json_included.first[:type]).to eq "tasks"
+
+      new_goal_id = json_data[:id]
+      new_task_id = json_included.first[:id]
+      new_goal    = Goal.find(new_goal_id)
+      new_task    = Task.find(new_task_id)
+
+      expect(new_goal.tasks.count).to eq 1
+      expect(new_goal.tasks.first).to eq new_task
     end
   end
 end

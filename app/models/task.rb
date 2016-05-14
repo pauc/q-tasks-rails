@@ -11,7 +11,7 @@ class Task < ActiveRecord::Base
   has_many :dependent_tasks, through: :inverse_task_dependency,
     source: :dependent_task
 
-  validates :name, presence: true, uniqueness: { scope: :goal_id }
+  validates :name, uniqueness: { scope: :goal_id }
 
   acts_as_list scope: :goal
 end

@@ -7,7 +7,9 @@ class GoalsController::CreateRecord < Operation
 
     goal.project = project
 
-    goal.save
+    if goal.save
+      goal.tasks.create
+    end
   end
 
   def goal_params
