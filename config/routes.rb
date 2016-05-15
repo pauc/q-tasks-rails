@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   scope path: "/:team_id" do
     with_options except: [:new, :edit] do
+      resources :attachments
       resources :goals
       resources :projects
       resources :tasks

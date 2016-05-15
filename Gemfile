@@ -16,7 +16,12 @@ gem 'active_model_serializers', '~> 0.10.0.rc5'
 
 gem 'redis', '~>3.3'
 
+# Configuration
 gem 'dotenv-rails'
+
+# File uploads
+gem 'carrierwave'
+gem 'fog-aws'
 
 gem 'acts_as_list'
 

@@ -16,3 +16,4 @@ config/database.yml
 .env.production
 .byebug_history
 spec/examples.txt
+.env
