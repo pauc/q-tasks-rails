@@ -14,7 +14,8 @@ class TasksController::CreateRecord < Operation
     params.require(:data).permit(
       attributes: [
         :name,
-        :description
+        :description,
+        :position
       ]
     )
   end
