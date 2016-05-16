@@ -14,7 +14,7 @@ class TasksController::UpdateRecord < Operation
     params.require(:data).permit(
       attributes: [
         :name,
-        :description,
+        :description_markdown,
         :position
       ]
     )

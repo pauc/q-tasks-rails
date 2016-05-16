@@ -17,4 +17,19 @@ class Task < ActiveRecord::Base
   }, allow_blank: true
 
   acts_as_list scope: :goal
+
+  def description_markdown=(text)
+    input = Loofah.fragment(text)
+
+    sanitized_description = input.scrub!(sanitizer).to_s
+
+    self.description_html = MarkdownParser.render(sanitized_description)
+
+    super(sanitized_description)
+  end
+
+  def sanitizer
+     @sanitizer ||= Rails::Html::PermitScrubber.new
+       .tap { |sanitzr| sanitzr.tags = ['a'] }
+  end
 end

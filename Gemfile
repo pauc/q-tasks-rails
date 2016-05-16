@@ -23,6 +23,9 @@ gem 'dotenv-rails'
 gem 'carrierwave'
 gem 'fog-aws'
 
+# Markdown parser
+gem 'redcarpet'
+
 gem 'acts_as_list'
 
 group :production do

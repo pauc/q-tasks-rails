@@ -39,7 +39,7 @@ RSpec.describe TasksController, type: :api do
             type: "tasks",
             attributes: {
               name: "A new task",
-              description: "Lorem ipsum blah blah blah..."
+              description_markdown: "Lorem ipsum blah blah blah..."
             },
             relationships: {
               goal: {
@@ -57,7 +57,7 @@ RSpec.describe TasksController, type: :api do
 
 
       expect(json_attributes[:name]).to eq "A new task"
-      expect(json_attributes[:description])
+      expect(json_attributes[:description_markdown])
         .to eq "Lorem ipsum blah blah blah..."
       expect(json_relationships[:goal][:data][:id])
         .to eq goal.id.to_s
