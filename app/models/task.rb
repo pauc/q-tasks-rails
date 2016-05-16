@@ -19,13 +19,9 @@ class Task < ActiveRecord::Base
   acts_as_list scope: :goal
 
   def description_markdown=(text)
-    input = Loofah.fragment(text)
+    self.description_html = MarkdownParser.call(text.to_s)
 
-    sanitized_description = input.scrub!(sanitizer).to_s
-
-    self.description_html = MarkdownParser.render(sanitized_description)
-
-    super(sanitized_description)
+    super
   end
 
   def sanitizer

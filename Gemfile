@@ -23,8 +23,9 @@ gem 'dotenv-rails'
 gem 'carrierwave'
 gem 'fog-aws'
 
-# Markdown parser
+# Markdown parser and syntax highlighting
 gem 'redcarpet'
+gem 'rouge'
 
 gem 'acts_as_list'
 
