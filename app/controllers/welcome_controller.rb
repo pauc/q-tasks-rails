@@ -4,7 +4,9 @@ class WelcomeController < ApplicationController
   skip_before_action :doorkeeper_authorize!
 
   def index
-    html = Redis.current.get 'q-tasks:index:current-content'
+    revision_key = params[:frontend_version] || "current-content"
+
+    html = Redis.current.get "q-tasks:index:#{revision_key}"
 
     render html: html.html_safe
   end
