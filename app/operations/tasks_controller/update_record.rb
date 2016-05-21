@@ -21,13 +21,11 @@ class TasksController::UpdateRecord < Operation
   end
 
   def assign_user
-    user_data = params.fetch(:data, {})
+    relationships_data = params.fetch(:data, {})
       .fetch(:relationships, {})
-      .fetch(:user, {})
-      .fetch(:data, {})
 
-    if user_data.key?(:id) && user_data[:id].blank?
-      task.assignments.destroy_all
+    if relationships_data.key?(:user) && (relationships_data[:user].blank? || relationships_data[:user][:id].blank?)
+      result.assignments.destroy_all
 
       return
     end
