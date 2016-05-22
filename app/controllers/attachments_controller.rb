@@ -1,4 +1,14 @@
 class AttachmentsController < ApplicationController
+  def index
+    respond_with default_operation.result
+  end
+
+  def show
+    attachment = current_team.attachments.find(params[:id])
+
+    respond_with attachment
+  end
+
   def create
     attachment = Attachment.create(attachment_params) do |att|
       att.goal = goal

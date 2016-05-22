@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160521105806) do
+ActiveRecord::Schema.define(version: 20160522131339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,13 +27,16 @@ ActiveRecord::Schema.define(version: 20160521105806) do
   add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
 
   create_table "attachments", force: :cascade do |t|
-    t.string   "file"
+    t.string   "file",       null: false
     t.integer  "goal_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "is_image"
+    t.string   "permalink",  null: false
   end
 
   add_index "attachments", ["goal_id"], name: "index_attachments_on_goal_id", using: :btree
+  add_index "attachments", ["permalink"], name: "index_attachments_on_permalink", unique: true, using: :btree
 
   create_table "goals", force: :cascade do |t|
     t.string   "name",        null: false

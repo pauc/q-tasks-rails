@@ -22,6 +22,7 @@ gem 'dotenv-rails'
 # File uploads
 gem 'carrierwave'
 gem 'fog-aws'
+gem 'mini_magick'
 
 # Markdown parser and syntax highlighting
 gem 'redcarpet'
@@ -56,4 +57,3 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano3-unicorn'
 end
-
