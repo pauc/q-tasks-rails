@@ -1,5 +1,9 @@
 class AttachmentSerializer < ActiveModel::Serializer
-  attributes :id, :is_image
+  attributes :id, :is_image, :created_at
+
+  attribute :file_name do
+    object[:file]
+  end
 
   attribute :file_url do
     object.file.try(:url)
