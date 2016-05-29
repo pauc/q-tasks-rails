@@ -17,6 +17,12 @@ class AttachmentsController < ApplicationController
     respond_with attachment
   end
 
+  def destroy
+    attachment = current_team.attachments.find(params[:id])
+
+    respond_with attachment.destroy
+  end
+
   private
 
   def attachment_params

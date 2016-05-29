@@ -5,4 +5,5 @@ class TaskSerializer < ActiveModel::Serializer
   belongs_to :user do
     object.users.first
   end
+  has_many :dependencies
 end
