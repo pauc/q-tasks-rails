@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160522131339) do
+ActiveRecord::Schema.define(version: 20160529195505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 20160522131339) do
 
   add_index "attachments", ["goal_id"], name: "index_attachments_on_goal_id", using: :btree
   add_index "attachments", ["permalink"], name: "index_attachments_on_permalink", unique: true, using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "body_html"
+    t.text     "body_markdown"
+    t.integer  "task_id",       null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "comments", ["task_id"], name: "index_comments_on_task_id", using: :btree
 
   create_table "goals", force: :cascade do |t|
     t.string   "name",        null: false
@@ -145,6 +155,7 @@ ActiveRecord::Schema.define(version: 20160522131339) do
   add_foreign_key "assignments", "tasks", on_delete: :cascade
   add_foreign_key "assignments", "users", on_delete: :cascade
   add_foreign_key "attachments", "goals"
+  add_foreign_key "comments", "tasks", on_delete: :cascade
   add_foreign_key "goals", "projects", on_delete: :cascade
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id", on_delete: :cascade
   add_foreign_key "projects", "teams", on_delete: :cascade

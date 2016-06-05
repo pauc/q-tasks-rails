@@ -24,14 +24,6 @@ RSpec.describe Task, type: :model do
   end
 
   describe "#description_markdown=(text)" do
-    it "the text is sanitized before store it" do
-      task = create :task, description_markdown:  "An html fragment with <strong>strong</strong> and " \
-        "<a href='https://google.com' onclick='hack()'>link</a> tags"
-
-      expect(task.description_markdown).to eq "An html fragment with strong and " \
-        "<a href=\"https://google.com\">link</a> tags"
-    end
-
     it "parses the markdown and stores the result in :description_html" do
       task = create :task, description_markdown:  "A text with **markdown**"
 

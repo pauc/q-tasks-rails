@@ -10,6 +10,7 @@ class Task < ActiveRecord::Base
     source: :dependency_task
   has_many :dependent_tasks, through: :inverse_task_dependency,
     source: :dependent_task
+  has_many :comments
 
   validates :name, uniqueness: {
     scope:          :goal_id,
@@ -22,10 +23,5 @@ class Task < ActiveRecord::Base
     self.description_html = MarkdownParser.call(text.to_s)
 
     super
-  end
-
-  def sanitizer
-     @sanitizer ||= Rails::Html::PermitScrubber.new
-       .tap { |sanitzr| sanitzr.tags = ['a'] }
   end
 end

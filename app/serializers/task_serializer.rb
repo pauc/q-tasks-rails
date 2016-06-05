@@ -6,4 +6,5 @@ class TaskSerializer < ActiveModel::Serializer
     object.users.first
   end
   has_many :dependencies
+  has_many :comments
 end

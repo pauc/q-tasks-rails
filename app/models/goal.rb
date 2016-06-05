@@ -1,6 +1,6 @@
 class Goal < ActiveRecord::Base
   belongs_to :project
-  has_many :attachments
+  has_many :attachments, dependent: :destroy
   has_many :tasks
 
   validates :project, presence: true
