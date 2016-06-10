@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user_from_token
-    return unless doorkeeper_token.resource_owner_id
+    return unless doorkeeper_token.try :resource_owner_id
 
     user = User.find(doorkeeper_token.resource_owner_id)
     sign_in user, store: false if user
