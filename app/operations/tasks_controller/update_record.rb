@@ -16,7 +16,8 @@ class TasksController::UpdateRecord < Operation
       attributes: [
         :name,
         :description_markdown,
-        :position
+        :position,
+        :done
       ]
     )
   end
