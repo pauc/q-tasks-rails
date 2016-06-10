@@ -6,6 +6,7 @@ class CommentsController::CreateRecord < Operation
     self.result = comment = Comment.new comment_attributes
 
     comment.task = task
+    comment.user = current_user
 
     comment.save
   end

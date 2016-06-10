@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160529195505) do
+ActiveRecord::Schema.define(version: 20160610204242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,9 +44,11 @@ ActiveRecord::Schema.define(version: 20160529195505) do
     t.integer  "task_id",       null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "user_id",       null: false
   end
 
   add_index "comments", ["task_id"], name: "index_comments_on_task_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "goals", force: :cascade do |t|
     t.string   "name",        null: false
@@ -156,6 +158,7 @@ ActiveRecord::Schema.define(version: 20160529195505) do
   add_foreign_key "assignments", "users", on_delete: :cascade
   add_foreign_key "attachments", "goals"
   add_foreign_key "comments", "tasks", on_delete: :cascade
+  add_foreign_key "comments", "users"
   add_foreign_key "goals", "projects", on_delete: :cascade
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id", on_delete: :cascade
   add_foreign_key "projects", "teams", on_delete: :cascade

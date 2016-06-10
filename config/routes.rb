@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
+  devise_for :users, controllers: {}
+
   use_doorkeeper do
     skip_controllers :applications, :authorized_applications, :authorizations, :token_info
   end
