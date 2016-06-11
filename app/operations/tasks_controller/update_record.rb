@@ -39,17 +39,20 @@ class TasksController::UpdateRecord < Operation
   def assign_dependencies
     return unless relationships_data.key?(:dependencies)
 
-    dependencies_data = relationships_data[:dependencies]
+    dependency_ids = (relationships_data
+      .fetch(:dependencies, {})[:data] || [])
+      .map { |data| data[:id] }
 
-    if dependencies_data.blank? || dependencies_data[:data].blank?
-      result.dependencies = []
+    TaskDependency.where(dependent_task: result)
+      .where.not(dependency_task_id: dependency_ids)
+      .destroy_all
 
-      return
+    dependency_ids.each do |dependency_id|
+      TaskDependency.find_or_create_by(
+        dependent_task_id:  result.id,
+        dependency_task_id: dependency_id
+      )
     end
-
-    dependency_ids = dependencies_data[:data].map { |data| data[:id] }
-
-    result.dependency_ids = dependency_ids
   end
 
   def relationships_data

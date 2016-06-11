@@ -25,7 +25,7 @@ class BasicUploader < CarrierWave::Uploader::Base
   # end
 
   version :thumb, if: :is_image? do
-    process :resize_to_limit => [200, 0]
+    process :resize_to_limit => [200, nil]
   end
 
   version :preview, if: :is_image? do
