@@ -1,3 +1,5 @@
+## QUIPU
+
 quipu_attrs = {
   name:      "Quipu",
   subdomain: "quipu"
@@ -25,6 +27,43 @@ users_attrs = [{
   username: "Zacarías",
   email:    "z@z.com",
   team:     quipu
+}]
+
+users_attrs.each do |user_attrs|
+  User.find_or_create_by(user_attrs) do |user|
+    user.password = "secret123"
+  end
+end
+
+## UOC
+
+uoc_attrs = {
+  name:      "UOC",
+  subdomain: "uoc"
+}
+
+uoc = Team.find_or_create_by uoc_attrs
+
+users_attrs = [{
+  username: "Ferran P.",
+  email:    "fpradosc@uoc.edu",
+  team:     uoc
+}, {
+  username: "Antonio R.",
+  email:    "aromanos@uoc.edu",
+  team:     uoc
+}, {
+  username: "Pau C.",
+  email:    "p@p.p",
+  team:     uoc
+}, {
+  username: "Oriol",
+  email:    "o@o.com",
+  team:     uoc
+}, {
+  username: "Zacarías",
+  email:    "z@z.com",
+  team:     uoc
 }]
 
 users_attrs.each do |user_attrs|
