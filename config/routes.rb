@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       resources :attachments
       resources :comments, only: [:index, :show, :create]
       resources :goals
-      resources :projects
+      resources :projects, only: [:index, :show, :create]
       resources :tasks
       resources :users, only: [:index, :show]
     end
