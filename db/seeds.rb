@@ -54,17 +54,22 @@ users_attrs = [{
   team:     uoc
 }, {
   username: "Pau C.",
-  email:    "p@p.p",
+  email:    "paucompte@uoc.edu",
   team:     uoc
 }, {
   username: "Oriol",
-  email:    "o@o.com",
+  email:    "o@o.o",
   team:     uoc
 }, {
   username: "Zacarías",
-  email:    "z@z.com",
+  email:    "z@z.z",
   team:     uoc
-}]
+}, {
+  username: "Atanasi D.",
+  email:    "adaradoumis@uoc.edu",
+  team:     uoc
+}
+]
 
 users_attrs.each do |user_attrs|
   User.find_or_create_by(user_attrs) do |user|
